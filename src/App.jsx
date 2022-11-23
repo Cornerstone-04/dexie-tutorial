@@ -30,7 +30,6 @@ const App = () => {
     }
   };
 
-  
   const addTask = async (e) => {
     e.preventDefault();
     if (taskInput) {
@@ -44,20 +43,20 @@ const App = () => {
       alert("Please add a task.");
     }
   };
-  
+
   const deleteTask = async (id) => await todos.delete(id);
-  
+
   const toggleStatus = async (id, e) => {
     await todos.update(id, { completed: !!e.target.checked });
   };
-  
+
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-start py-[30px]">
+    <div className="w-full min-h-screen flex justify-center items-start py-[30px] bg-gray-100">
       <div className="w-[90%] lg:w-[50%] flex flex-col gap-[40px] items-center">
         <h1 className="text-slate-700 font-bold text-2xl">Todo App</h1>
         <form
@@ -69,7 +68,7 @@ const App = () => {
             name=""
             id=""
             placeholder="What are you doing today?"
-            className="w-full outline-none border-b-2 border-slate-700 pb-[8px] pl-[5px]"
+            className="w-full outline-none bg-transparent text-slate-700 font-medium placeholder:text-gray-400 focus:placeholder:text-slate-700 placeholder:transition-all placeholder:ease-linear border-b-2 border-slate-700 pb-[8px] pl-[5px]"
             value={taskInput}
             onChange={(e) => setTaskInput(e.target.value)}
           />
@@ -79,7 +78,7 @@ const App = () => {
         </form>
 
         <div
-          className="w-full shadow-md min-h-full flex flex-col gap-[20px] justify-center items-center p-[20px]"
+          className="w-full bg-white shadow-md min-h-full flex flex-col gap-[20px] justify-center items-center p-[20px]"
           value="container"
         >
           {container ? "" : <p>No tasks added</p>}
