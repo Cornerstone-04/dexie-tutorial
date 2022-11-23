@@ -1,0 +1,35 @@
+.tick {
+  position: relative;
+}
+.checkbox {
+  position: relative;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  border:2px solid #0f766e;
+  /* border-radius: 5px; */
+  cursor: pointer;
+  display: block;
+}
+.checkbox::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 4px;
+  width: 7px;
+  height: 12px;
+  opacity: 0;
+  transform: rotate(45deg) scale(0);
+  border-right: 2px solid #0f766e;
+  border-bottom: 2px solid #0f766e;
+  transition: all 0.3s linear;
+}
+
+#checkbox:checked ~ .checkbox::after {
+  opacity: 1 !important;
+  transform: rotate(45deg) scale(1) !important;
+}
+
+.hidden-xs-up {
+  display: none !important;
+}
