@@ -12,7 +12,6 @@ const { todos } = db;
 const App = () => {
   const [displayArrow, setDisplayArrow] = useState(false);
   const [taskInput, setTaskInput] = useState("");
-  const [container, setContainer] = useState(false);
   const allItems = useLiveQuery(() => todos.toArray(), []);
 
   const scrollUp = () => {
@@ -38,13 +37,12 @@ const App = () => {
         completed: false,
       });
       setTaskInput("");
-      setContainer(true);
     } else {
       alert("Please add a task.");
     }
   };
 
-  const deleteTask = async (id) => await todos.delete(id);
+  const deleteColor = async (id) => await todos.delete(id);
 
   const toggleStatus = async (id, e) => {
     await todos.update(id, { completed: !!e.target.checked });
@@ -81,7 +79,6 @@ const App = () => {
           className="w-full bg-white shadow-md min-h-full flex flex-col gap-[20px] justify-center items-center p-[20px]"
           value="container"
         >
-          {container ? "" : <p>No tasks added</p>}
           {allItems?.map(({ completed, id, task }) => (
             <div className="w-full flex justify-between items-end" key={id}>
               <p>
@@ -102,7 +99,7 @@ const App = () => {
               </p>
               <button
                 className="cursor-pointer bg-red-600 px-[15px] py-[5px] text-white font-semibold"
-                onClick={() => deleteTask(id)}
+                onClick={() => deleteColor(id)}
               >
                 Del
               </button>
@@ -112,8 +109,22 @@ const App = () => {
       </div>
 
       {displayArrow && (
-        <button className="fixed bottom-[40px] right-[10px]" onClick={scrollUp}>
-          Up
+        <button
+          className="flex justify-center items-center w-10 h-10 fixed bottom-[20px] right-[10px] cursor-pointer"
+          onClick={scrollUp}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
         </button>
       )}
     </div>
